@@ -2,6 +2,8 @@
 
 A module to provide upstream dependency checks for service health endpoints
 
+[![Build Status](https://travis-ci.org/frontseed/roll-call.svg?branch=master)](https://travis-ci.org/frontseed/roll-call)
+
 ## Requirements
 
 This module is written with standards ES2015 and up and does not use any transpilers.  

@@ -1,6 +1,6 @@
 {
   "name": "@frontseed/roll-call",
-  "version": "0.0.0-development",
+  "version": "0.0.0",
   "description": "Service dependency checks for a JSON health endpoint",
   "main": "lib/index.js",
   "license": "MIT",
