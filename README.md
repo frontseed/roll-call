@@ -34,7 +34,7 @@ const checks = rc.configure({
   ),
 
   // Add a raw check to check on any custom dependency such as a socket connection.
-  myRawCheck: new RawCheck(() => {
+  myRawCheck: new rc.RawCheck(() => {
     const result = myInternalCheck()
     return result ? rc.up() : rc.down()
   })
