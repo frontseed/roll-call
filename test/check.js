@@ -14,7 +14,7 @@ describe('Checks', () => {
 
     describe('basic web check', () => {
       beforeEach(() => {
-        check = new WebCheck('https://example.com/status', { timeout: 5 })
+        check = new WebCheck('https://example.com/status')
         request = nock('https://example.com').get('/status')
       })
 
@@ -41,6 +41,7 @@ describe('Checks', () => {
 
       it('returns status DOWN when there is a socket timeout', async () => {
         // Arrange.
+        check.options.timeout = 5
         request.socketDelay(10)
         // Act.
         const result = await check.run()
@@ -55,6 +56,16 @@ describe('Checks', () => {
         const result = await check.run()
         // Assert.
         expect(result).to.contain({ status: 'DOWN' })
+      })
+
+      it('returns a non-circular payload for JSON conversion', async () => {
+        // Arrange.
+        request.reply(503, 'something bad happened')
+        const parser = r => () => JSON.stringify(r)
+        // Act.
+        const result = await check.run()
+        // Assert.
+        expect(parser(result)).to.not.throw()
       })
     })
 
